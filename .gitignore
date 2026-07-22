@@ -1,0 +1,25 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# OS-specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Omelette & Design Canvas State files
+.image-slots.state.json
+
+# Text documents/scraps (optional, keeping folder in repo but ignoring scraps/ if needed, 
+# or just keeping it. Let's ignore typical tmp files)
+*.tmp
+*.temp

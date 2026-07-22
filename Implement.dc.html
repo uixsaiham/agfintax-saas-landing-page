@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,800,900&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#FAF8F5; font-family:'Satoshi',sans-serif; -webkit-font-smoothing:antialiased; }
+  *, *::before, *::after { box-sizing:border-box; }
+  a { color:#F36222; text-decoration:none; }
+  a:hover { color:#c94f1a; }
+  @keyframes riseUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes popIn { 0% { opacity:0; transform:scale(.6); } 60% { opacity:1; transform:scale(1.08); } 100% { transform:scale(1); } }
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:#FAF8F5;color:#1E1E5A;">
+
+  <div style="position:sticky;top:0;z-index:40;background:rgba(250,248,245,.9);backdrop-filter:blur(8px);border-bottom:1px solid #ece7de;">
+    <div style="max-width:1280px;margin:0 auto;padding:16px 16px;display:flex;align-items:center;gap:24px;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <img src="uploads/ag-fintax-logo.png" alt="AGFinTax logo" style="height:30px;width:auto;object-fit:contain;"/>
+        <div style="font-weight:800;font-size:16.5px;letter-spacing:-.01em;color:#1E1E5A;">AGFinTax</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <sc-for list="{{ navSteps }}" as="step" hint-placeholder-count="5">
+          <div style="display:flex;align-items:center;gap:6px;">
+            <a href="{{ step.href }}" style="display:flex;align-items:center;gap:7px;padding:{{ step.padding }};border-radius:999px;background:{{ step.bg }};text-decoration:none;cursor:{{ step.cursor }};">
+              <div style="width:20px;height:20px;border-radius:999px;background:{{ step.dotBg }};color:{{ step.dotColor }};display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">{{ step.n }}</div>
+              <sc-if value="{{ step.showLabel }}"><span style="font-size:13px;font-weight:600;color:{{ step.textColor }};white-space:nowrap;">{{ step.label }}</span></sc-if>
+            </a>
+            <sc-if value="{{ step.hasNext }}"><div style="width:20px;height:1px;background:#ece7de;flex-shrink:0;"></div></sc-if>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-left:auto;width:32px;height:32px;border-radius:999px;background:linear-gradient(135deg,#1E1E5A,#F36222);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;">PP</div>
+    </div>
+  </div>
+
+  <div style="max-width:1280px;margin:0 auto;padding:36px 16px 100px;">
+
+    <div style="margin-bottom:24px;animation:riseUp .5s cubic-bezier(.16,1,.3,1) both;">
+      <h1 style="font-size:28px;font-weight:800;letter-spacing:-.02em;margin:0 0 6px;color:#1E1E5A;">Implement your strategies</h1>
+      <p style="font-size:14.5px;color:#5b5b78;margin:0;">Track each action to completion — mark them off as you and Sarah finish them.</p>
+    </div>
+
+    <div style="background:#fff;border:1px solid #ece7de;border-radius:18px;padding:20px 24px;margin-bottom:16px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <div style="font-size:14px;font-weight:700;color:#1E1E5A;">Implementation progress</div>
+        <div style="font-size:13px;font-weight:700;color:#F36222;">{{ progressPercent }}% complete</div>
+      </div>
+      <div style="height:8px;border-radius:999px;background:#f1f0eb;overflow:hidden;">
+        <div style="height:100%;border-radius:999px;background:linear-gradient(90deg,#F36222,#ff9a5c);width:{{ progressPercent }}%;transition:width .5s cubic-bezier(.16,1,.3,1);"></div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <sc-for list="{{ tasks }}" as="task" hint-placeholder-count="3">
+        <div onClick="{{ task.toggle }}" style="background:#fff;border:1px solid #ece7de;border-radius:16px;padding:18px 22px;display:flex;align-items:flex-start;gap:14px;cursor:pointer;transition:box-shadow .2s ease;" style-hover="box-shadow:0 8px 20px rgba(30,30,90,.06);">
+          <div style="width:24px;height:24px;border-radius:999px;background:{{ task.dotBg }};border:2px solid {{ task.dotBorder }};display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+            <sc-if value="{{ task.done }}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" style="animation:popIn .3s ease both;"><path d="M20 6L9 17l-5-5"></path></svg></sc-if>
+          </div>
+          <div style="flex:1;">
+            <div style="font-size:14px;font-weight:700;color:{{ task.titleColor }};text-decoration:{{ task.strike }};">{{ task.title }}</div>
+            <div style="font-size:12.5px;color:#8b8ba3;margin-top:3px;line-height:1.5;">{{ task.detail }}</div>
+          </div>
+          <div style="font-size:12px;font-weight:700;color:#F36222;white-space:nowrap;">{{ task.savings }}</div>
+        </div>
+      </sc-for>
+    </div>
+
+    <sc-if value="{{ allDone }}">
+      <div style="margin-top:20px;background:#1E1E5A;border-radius:18px;padding:24px;display:flex;align-items:center;gap:16px;animation:riseUp .4s ease both;">
+        <div style="width:44px;height:44px;border-radius:999px;background:#F36222;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6"><path d="M20 6L9 17l-5-5"></path></svg>
+        </div>
+        <div>
+          <div style="font-size:15px;font-weight:800;color:#fff;">All strategies implemented</div>
+          <div style="font-size:12.5px;color:rgba(255,255,255,.65);">Your projected amount owed is now closer to $1,548. Sarah will confirm at year-end.</div>
+        </div>
+      </div>
+    </sc-if>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+class Component extends DCLogic {
+  state = {
+    tasks: [
+      { key: 'dep', title: 'File Form 4562 for full rental depreciation', detail: 'Submitted to correct underclaimed depreciation on the rental property.', savings: '+$2,400', done: false },
+      { key: 'sep', title: 'Open and fund a SEP-IRA', detail: "Shelter part of Paula's $52,900 business income before the deadline.", savings: '+$2,950', done: false },
+      { key: 'ctc', title: 'Confirm Child Tax Credit eligibility', detail: 'Verify Bart and Lisa qualify for the full credit with Sarah.', savings: '+$800', done: false },
+    ],
+  };
+  toggle(key) {
+    this.setState(s => ({ tasks: s.tasks.map(t => t.key === key ? { ...t, done: !t.done } : t) }));
+  }
+  renderVals() {
+    const s = this.state;
+    const doneCount = s.tasks.filter(t => t.done).length;
+    const percent = Math.round((doneCount / s.tasks.length) * 100);
+    return {
+      navSteps: [
+        { n: 1, label: 'Intake', hasNext: true, showLabel: true, bg: 'transparent', dotBg: '#F36222', dotColor: '#fff', textColor: '#1E1E5A', padding: '0', href: 'AGFinTax Intake v2.dc.html', cursor: 'pointer' },
+        { n: 2, label: 'Dashboard', hasNext: true, showLabel: true, bg: 'transparent', dotBg: '#F36222', dotColor: '#fff', textColor: '#1E1E5A', padding: '0', href: 'Dashboard.dc.html', cursor: 'pointer' },
+        { n: 3, label: 'Consult', hasNext: true, showLabel: true, bg: 'transparent', dotBg: '#F36222', dotColor: '#fff', textColor: '#1E1E5A', padding: '0', href: 'Consult.dc.html', cursor: 'pointer' },
+        { n: 4, label: 'Report', hasNext: true, showLabel: true, bg: 'transparent', dotBg: '#F36222', dotColor: '#fff', textColor: '#1E1E5A', padding: '0', href: 'Report.dc.html', cursor: 'pointer' },
+        { n: 5, label: 'Implement', hasNext: false, showLabel: true, bg: '#F36222', dotBg: '#fff', dotColor: '#F36222', textColor: '#fff', padding: '6px 14px 6px 6px', href: '#', cursor: 'default' },
+      ],
+      progressPercent: percent,
+      tasks: s.tasks.map(t => ({
+        ...t,
+        toggle: () => this.toggle(t.key),
+        dotBg: t.done ? '#F36222' : '#fff',
+        dotBorder: t.done ? '#F36222' : '#ece7de',
+        titleColor: t.done ? '#8b8ba3' : '#1E1E5A',
+        strike: t.done ? 'line-through' : 'none',
+      })),
+      allDone: doneCount === s.tasks.length,
+    };
+  }
+}
+
+</script>
+</body>
+</html>

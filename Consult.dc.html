@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,800,900&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#FAF8F5; font-family:'Satoshi',sans-serif; -webkit-font-smoothing:antialiased; }
+  *, *::before, *::after { box-sizing:border-box; }
+  a { color:#F36222; text-decoration:none; }
+  a:hover { color:#c94f1a; }
+  @keyframes riseUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes popIn { 0% { opacity:0; transform:scale(.6); } 60% { opacity:1; transform:scale(1.08); } 100% { transform:scale(1); } }
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:#FAF8F5;color:#1E1E5A;">
+
+  <div style="position:sticky;top:0;z-index:40;background:rgba(250,248,245,.9);backdrop-filter:blur(8px);border-bottom:1px solid #ece7de;">
+    <div style="max-width:1280px;margin:0 auto;padding:16px 16px;display:flex;align-items:center;gap:24px;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <img src="uploads/ag-fintax-logo.png" alt="AGFinTax logo" style="height:30px;width:auto;object-fit:contain;"/>
+        <div style="font-weight:800;font-size:16.5px;letter-spacing:-.01em;color:#1E1E5A;">AGFinTax</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <sc-for list="{{ navSteps }}" as="step" hint-placeholder-count="5">
+          <div style="display:flex;align-items:center;gap:6px;">
+            <a href="{{ step.href }}" style="display:flex;align-items:center;gap:7px;padding:{{ step.padding }};border-radius:999px;background:{{ step.bg }};text-decoration:none;cursor:{{ step.cursor }};">
+              <div style="width:20px;height:20px;border-radius:999px;background:{{ step.dotBg }};color:{{ step.dotColor }};display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">{{ step.n }}</div>
+              <sc-if value="{{ step.showLabel }}"><span style="font-size:13px;font-weight:600;color:{{ step.textColor }};white-space:nowrap;">{{ step.label }}</span></sc-if>
+            </a>
+            <sc-if value="{{ step.hasNext }}"><div style="width:20px;height:1px;background:#ece7de;flex-shrink:0;"></div></sc-if>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-left:auto;width:32px;height:32px;border-radius:999px;background:linear-gradient(135deg,#1E1E5A,#F36222);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;">PP</div>
+    </div>
+  </div>
+
+  <div style="max-width:1280px;margin:0 auto;padding:36px 16px 100px;">
+
+    <div style="margin-bottom:24px;animation:riseUp .5s cubic-bezier(.16,1,.3,1) both;">
+      <h1 style="font-size:28px;font-weight:800;letter-spacing:-.02em;margin:0 0 6px;color:#1E1E5A;">Book your planning consult</h1>
+      <p style="font-size:14.5px;color:#5b5b78;margin:0;">Based on your 2025 return, Sarah has 3 strategies to walk through with you and Paula.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:16px;">
+
+      <div style="display:flex;flex-direction:column;gap:16px;">
+
+        <div style="background:#fff;border:1px solid #ece7de;border-radius:18px;padding:22px 24px;">
+          <div style="font-size:15px;font-weight:700;color:#1E1E5A;margin-bottom:4px;">What we'll cover</div>
+          <div style="font-size:12.5px;color:#8b8ba3;margin-bottom:16px;">Prioritized from the opportunities found in your intake.</div>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <sc-for list="{{ agendaItems }}" as="item" hint-placeholder-count="3">
+              <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-radius:14px;background:#faf8f5;">
+                <div style="width:28px;height:28px;border-radius:999px;background:#fff0e6;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:800;color:#F36222;">{{ item.n }}</div>
+                <div>
+                  <div style="font-size:13.5px;font-weight:700;color:#1E1E5A;margin-bottom:3px;">{{ item.title }}</div>
+                  <div style="font-size:12px;color:#5b5b78;line-height:1.5;">{{ item.detail }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="background:#fff;border:1px solid #ece7de;border-radius:18px;padding:22px 24px;">
+          <div style="font-size:15px;font-weight:700;color:#1E1E5A;margin-bottom:14px;">Pick a time</div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
+            <sc-for list="{{ timeSlots }}" as="slot" hint-placeholder-count="8">
+              <button onClick="{{ slot.onClick }}" style="padding:12px 10px;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;background:{{ slot.bg }};color:{{ slot.color }};border:1.5px solid {{ slot.border }};min-height:44px;transition:all .15s ease;" style-hover="border-color:#F36222;">
+                {{ slot.label }}
+              </button>
+            </sc-for>
+          </div>
+          <button onClick="{{ confirmBooking }}" disabled="{{ confirmDisabled }}" style="margin-top:18px;width:100%;padding:13px 20px;border-radius:12px;background:{{ confirmBg }};color:{{ confirmColor }};border:none;font-size:14.5px;font-weight:700;cursor:{{ confirmCursor }};transition:transform .15s ease;" style-hover="transform:translateY(-2px);">
+            {{ confirmLabel }}
+          </button>
+          <sc-if value="{{ confirmed }}">
+            <a href="Report.dc.html" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;width:100%;padding:13px 20px;border-radius:12px;background:#1E1E5A;color:#fff;font-size:14.5px;font-weight:700;transition:transform .15s ease;" style-hover="transform:translateY(-2px);">
+              Continue to your report
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+            </a>
+          </sc-if>
+        </div>
+
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div style="background:#1E1E5A;border-radius:18px;padding:22px 24px;color:#fff;">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+            <div style="width:44px;height:44px;border-radius:999px;background:linear-gradient(135deg,#F36222,#ff9a5c);display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:800;flex-shrink:0;">SK</div>
+            <div>
+              <div style="font-size:14.5px;font-weight:700;">Sarah Kim, CPA</div>
+              <div style="font-size:11.5px;color:rgba(255,255,255,.6);">Licensed tax planner · 12 yrs experience</div>
+            </div>
+          </div>
+          <p style="font-size:12.5px;color:rgba(255,255,255,.75);line-height:1.6;margin:0;">"I've reviewed your rental property and business income — there are a few moves we can make before year-end that could meaningfully lower what you owe."</p>
+        </div>
+
+        <div style="background:#fff;border:1px solid #ece7de;border-radius:18px;padding:20px 22px;">
+          <div style="font-size:14px;font-weight:700;color:#1E1E5A;margin-bottom:12px;">Consult details</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F36222" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg>
+              <div style="font-size:12.5px;color:#475569;font-weight:600;">30 minutes, video call</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F36222" stroke-width="1.8"><path d="M12 2l8 4v6c0 5-3.4 8.5-8 10-4.6-1.5-8-5-8-10V6z"></path><path d="M9 12l2 2 4-4"></path></svg>
+              <div style="font-size:12.5px;color:#475569;font-weight:600;">Included in your plan — no extra charge</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F36222" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>
+              <div style="font-size:12.5px;color:#475569;font-weight:600;">Reschedule anytime, 24hr notice</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+const SLOTS = ['Mon 9:00 AM','Mon 2:00 PM','Tue 10:30 AM','Tue 4:00 PM','Wed 9:00 AM','Wed 1:00 PM','Thu 11:00 AM','Fri 3:00 PM'];
+class Component extends DCLogic {
+  state = { selectedSlot: null, confirmed: false };
+  selectSlot(s) { this.setState({ selectedSlot: s }); }
+  confirmBooking() {
+    if (!this.state.selectedSlot) return;
+    this.setState({ confirmed: true });
+  }
+  renderVals() {
+    const s = this.state;
+    return {
+      navSteps: [
+        { n: 1, label: 'Intake', hasNext: true, showLabel: true, bg: 'transparent', dotBg: '#F36222', dotColor: '#fff', textColor: '#1E1E5A', padding: '0', href: 'AGFinTax Intake v2.dc.html', cursor: 'pointer' },
+        { n: 2, label: 'Dashboard', hasNext: true, showLabel: true, bg: 'transparent', dotBg: '#F36222', dotColor: '#fff', textColor: '#1E1E5A', padding: '0', href: 'Dashboard.dc.html', cursor: 'pointer' },
+        { n: 3, label: 'Consult', hasNext: true, showLabel: true, bg: '#F36222', dotBg: '#fff', dotColor: '#F36222', textColor: '#fff', padding: '6px 14px 6px 6px', href: '#', cursor: 'default' },
+        { n: 4, label: 'Report', hasNext: true, showLabel: true, bg: 'transparent', dotBg: '#ece7de', dotColor: '#b0b0c4', textColor: '#b0b0c4', padding: '0', href: 'Report.dc.html', cursor: 'pointer' },
+        { n: 5, label: 'Implement', hasNext: false, showLabel: true, bg: 'transparent', dotBg: '#ece7de', dotColor: '#b0b0c4', textColor: '#b0b0c4', padding: '0', href: 'Implement.dc.html', cursor: 'pointer' },
+      ],
+      agendaItems: [
+        { n: 1, title: 'Rental property depreciation review', detail: 'Confirm Form 4562 depreciation is fully claimed on your single-family rental.' },
+        { n: 2, title: 'Retirement contributions for Schedule C income', detail: 'A SEP-IRA could shelter part of the $52,900 business income from tax.' },
+        { n: 3, title: 'Child Tax Credit phase-out check', detail: 'Verify Bart and Lisa qualify for the full credit given your $242,757 AGI.' },
+      ],
+      timeSlots: SLOTS.map(label => ({
+        label, onClick: () => this.selectSlot(label),
+        bg: s.selectedSlot === label ? '#F36222' : '#fff',
+        color: s.selectedSlot === label ? '#fff' : '#1E1E5A',
+        border: s.selectedSlot === label ? '#F36222' : '#ece7de',
+      })),
+      confirmDisabled: !s.selectedSlot || s.confirmed,
+      confirmBg: s.confirmed ? '#fff0e6' : s.selectedSlot ? '#F36222' : '#ece7de',
+      confirmColor: s.confirmed ? '#F36222' : s.selectedSlot ? '#fff' : '#b0b0c4',
+      confirmCursor: s.selectedSlot && !s.confirmed ? 'pointer' : 'not-allowed',
+      confirmLabel: s.confirmed ? `Confirmed for ${s.selectedSlot}` : s.selectedSlot ? `Confirm ${s.selectedSlot}` : 'Select a time above',
+      confirmed: s.confirmed,
+      confirmBooking: () => this.confirmBooking(),
+    };
+  }
+}
+
+</script>
+</body>
+</html>
