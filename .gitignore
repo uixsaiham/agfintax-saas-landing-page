@@ -33,6 +33,8 @@ check_file_type.ps1
 add_cache_buster.ps1
 update_transition.ps1
 add_fade_animation.ps1
+slower_fade.ps1
+
 
 
 
