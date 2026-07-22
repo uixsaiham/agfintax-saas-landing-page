@@ -31,6 +31,8 @@ check_live.ps1
 check_assets_live.ps1
 check_file_type.ps1
 add_cache_buster.ps1
+update_transition.ps1
+
 
 
 
