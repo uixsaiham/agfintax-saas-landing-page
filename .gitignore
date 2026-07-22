@@ -27,6 +27,14 @@ serve.ps1
 setup_assets.ps1
 generate_png_logos.ps1
 fix_paths.ps1
+check_live.ps1
+check_assets_live.ps1
+check_file_type.ps1
+add_cache_buster.ps1
+
+
+
+
 
 
 

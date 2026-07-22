@@ -19,13 +19,13 @@
 <meta name="ext-resource-dependency" content="assets/img13.jpg" data-resource-id="img13" />
 <meta name="ext-resource-dependency" content="assets/img14.jpg" data-resource-id="img14" />
 <meta name="ext-resource-dependency" content="assets/img15.jpg" data-resource-id="img15" />
-<meta name="ext-resource-dependency" content="assets/press-forbes.png" data-resource-id="pressForbes" />
-<meta name="ext-resource-dependency" content="assets/press-accountingtoday.png" data-resource-id="pressAT" />
-<meta name="ext-resource-dependency" content="assets/press-usnews.png" data-resource-id="pressUSNews" />
-<meta name="ext-resource-dependency" content="assets/press-inc.png" data-resource-id="pressInc" />
-<meta name="ext-resource-dependency" content="assets/press-thestreet.png" data-resource-id="pressTheStreet" />
-<meta name="ext-resource-dependency" content="assets/press-fa.png" data-resource-id="pressFA" />
-<meta name="ext-resource-dependency" content="assets/press-barrons.png" data-resource-id="pressBarrons" />
+<meta name="ext-resource-dependency" content="assets/press-forbes.png?v=2" data-resource-id="pressForbes" />
+<meta name="ext-resource-dependency" content="assets/press-accountingtoday.png?v=2" data-resource-id="pressAT" />
+<meta name="ext-resource-dependency" content="assets/press-usnews.png?v=2" data-resource-id="pressUSNews" />
+<meta name="ext-resource-dependency" content="assets/press-inc.png?v=2" data-resource-id="pressInc" />
+<meta name="ext-resource-dependency" content="assets/press-thestreet.png?v=2" data-resource-id="pressTheStreet" />
+<meta name="ext-resource-dependency" content="assets/press-fa.png?v=2" data-resource-id="pressFA" />
+<meta name="ext-resource-dependency" content="assets/press-barrons.png?v=2" data-resource-id="pressBarrons" />
 <template id="__bundler_thumbnail" data-bg-color="#1E1E5A">
   <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
     <rect width="1200" height="800" fill="#1E1E5A"/>
@@ -1159,13 +1159,13 @@ class Component extends DCLogic {
       ],
       trustedBrands: (() => {
         const list = [
-          { name: 'Forbes', logo: (window.__resources && window.__resources.pressForbes) || 'assets/press-forbes.png' },
-          { name: 'Accounting Today', logo: (window.__resources && window.__resources.pressAT) || 'assets/press-accountingtoday.png' },
-          { name: 'U.S. News & World Report', logo: (window.__resources && window.__resources.pressUSNews) || 'assets/press-usnews.png' },
-          { name: 'Inc.', logo: (window.__resources && window.__resources.pressInc) || 'assets/press-inc.png' },
-          { name: 'TheStreet', logo: (window.__resources && window.__resources.pressTheStreet) || 'assets/press-thestreet.png' },
-          { name: 'Financial Advisor', logo: (window.__resources && window.__resources.pressFA) || 'assets/press-fa.png' },
-          { name: "Barron's", logo: (window.__resources && window.__resources.pressBarrons) || 'assets/press-barrons.png' },
+          { name: 'Forbes', logo: (window.__resources && window.__resources.pressForbes) || 'assets/press-forbes.png?v=2' },
+          { name: 'Accounting Today', logo: (window.__resources && window.__resources.pressAT) || 'assets/press-accountingtoday.png?v=2' },
+          { name: 'U.S. News & World Report', logo: (window.__resources && window.__resources.pressUSNews) || 'assets/press-usnews.png?v=2' },
+          { name: 'Inc.', logo: (window.__resources && window.__resources.pressInc) || 'assets/press-inc.png?v=2' },
+          { name: 'TheStreet', logo: (window.__resources && window.__resources.pressTheStreet) || 'assets/press-thestreet.png?v=2' },
+          { name: 'Financial Advisor', logo: (window.__resources && window.__resources.pressFA) || 'assets/press-fa.png?v=2' },
+          { name: "Barron's", logo: (window.__resources && window.__resources.pressBarrons) || 'assets/press-barrons.png?v=2' },
         ];
         return [...list, ...list];
       })(),
