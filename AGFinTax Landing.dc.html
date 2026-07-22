@@ -58,6 +58,9 @@
   @keyframes fadeInOut { 0%, 100% { opacity: 0.45; } 50% { opacity: 1; } }
   @keyframes drawCircle60 { from { stroke-dashoffset: 226.2; } to { stroke-dashoffset: 90.5; } }
   @keyframes drawCircle40 { from { stroke-dashoffset: 226.2; } to { stroke-dashoffset: 135.7; } }
+  @keyframes drawLine { from { stroke-dashoffset: 280; } to { stroke-dashoffset: 0; } }
+  @keyframes fadeInChartFill { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes popChartCircle { 0% { transform: scale(0); opacity: 0; } 70% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
   @keyframes popIn { 0% { opacity:0; transform:scale(.6); } 60% { opacity:1; transform:scale(1.08); } 100% { transform:scale(1); } }
   @keyframes floatSlow { 0%,100% { transform:translate(0,0); } 50% { transform:translate(0,-16px); } }
   @keyframes floatSlow2 { 0%,100% { transform:translate(0,0); } 50% { transform:translate(14px,10px); } }
@@ -245,15 +248,15 @@
           <div style="font-size:19px;font-weight:800;color:#1E1E5A;margin-bottom:12px;">Business Efficiency</div>
           <p style="font-size:13px;color:#6b6b85;line-height:1.6;margin:0 0 auto;">Our team quickly pinpoints waste, shortens process times, and simplifies operations for maximum impact.</p>
           <div style="position:relative;margin-top:24px;">
-            <svg width="100%" height="130" viewBox="0 0 260 130" preserveAspectRatio="none">
-              <path d="M0 100 C 20 60, 40 30, 65 50 S 100 105, 130 65 S 160 25, 190 60 S 225 100, 260 75" fill="none" stroke="#0f766e" stroke-width="2.5" stroke-linecap="round"></path>
-              <path d="M0 100 C 20 60, 40 30, 65 50 S 100 105, 130 65 S 160 25, 190 60 S 225 100, 260 75 V130 H0 Z" fill="url(#heroChartFill)"></path>
+<svg width="100%" height="130" viewBox="0 0 260 130" preserveAspectRatio="none">
+              <path d="M0 100 C 20 60, 40 30, 65 50 S 100 105, 130 65 S 160 25, 190 60 S 225 100, 260 75" fill="none" stroke="#0f766e" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="280" stroke-dashoffset="280" style="animation: drawLine 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;"></path>
+              <path d="M0 100 C 20 60, 40 30, 65 50 S 100 105, 130 65 S 160 25, 190 60 S 225 100, 260 75 V130 H0 Z" fill="url(#heroChartFill)" style="animation: fadeInChartFill 2.2s ease forwards;"></path>
               <defs><linearGradient id="heroChartFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0f766e" stop-opacity="0.35"></stop><stop offset="100%" stop-color="#0f766e" stop-opacity="0"></stop></linearGradient></defs>
-              <circle cx="65" cy="50" r="4" fill="#0f766e"></circle>
-              <circle cx="190" cy="60" r="4" fill="#0f766e"></circle>
+              <circle cx="65" cy="50" r="4" fill="#0f766e" style="transform-origin: 65px 50px; animation: popChartCircle 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1.2s both;"></circle>
+              <circle cx="190" cy="60" r="4" fill="#0f766e" style="transform-origin: 190px 60px; animation: popChartCircle 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1.6s both;"></circle>
             </svg>
-            <div style="position:absolute;top:8px;left:44px;font-size:10.5px;font-weight:700;color:#0f766e;">+157.7%</div>
-            <div style="position:absolute;top:20px;left:170px;font-size:10.5px;font-weight:700;color:#0f766e;">+98.3%</div>
+            <div style="position:absolute;top:8px;left:44px;font-size:10.5px;font-weight:700;color:#0f766e; animation: fadeInChartFill 0.5s ease 1.3s both;">+157.7%</div>
+            <div style="position:absolute;top:20px;left:170px;font-size:10.5px;font-weight:700;color:#0f766e; animation: fadeInChartFill 0.5s ease 1.7s both;">+98.3%</div>
           </div>
           <div style="display:flex;justify-content:space-between;font-size:10.5px;color:#a3a3b8;font-weight:700;">
             <span>Q1</span><span>Q2</span><span>Q3</span><span>Q4</span>

@@ -30,6 +30,10 @@ add_savings_animation.ps1
 fix_savings_vals.ps1
 update_support_script.ps1
 fix_svg_text.ps1
+check_live_deployed.ps1
+add_graph_animation.ps1
+
+
 
 
 
