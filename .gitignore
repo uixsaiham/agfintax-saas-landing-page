@@ -23,3 +23,7 @@ Thumbs.db
 # or just keeping it. Let's ignore typical tmp files)
 *.tmp
 *.temp
+serve.ps1
+setup_assets.ps1
+
+

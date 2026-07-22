@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" width="1000" height="600">
+  <rect width="1000" height="600" fill="transparent"/>
+  <!-- Abstract dots representing USA Map -->
+  <circle cx="200" cy="200" r="8" fill="#F36222" opacity="0.6"/>
+  <circle cx="300" cy="250" r="10" fill="#1E1E5A" opacity="0.6"/>
+  <circle cx="450" cy="300" r="12" fill="#F36222" opacity="0.6"/>
+  <circle cx="600" cy="200" r="14" fill="#1E1E5A" opacity="0.6"/>
+  <circle cx="750" cy="280" r="10" fill="#F36222" opacity="0.6"/>
+  <circle cx="850" cy="220" r="16" fill="#1E1E5A" opacity="0.6"/>
+  <circle cx="500" cy="180" r="9" fill="#0f766e" opacity="0.6"/>
+  <circle cx="350" cy="400" r="11" fill="#4338ca" opacity="0.6"/>
+  <circle cx="650" cy="380" r="13" fill="#c94f1a" opacity="0.6"/>
+</svg>
