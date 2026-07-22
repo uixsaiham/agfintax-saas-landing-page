@@ -25,5 +25,7 @@ Thumbs.db
 *.temp
 serve.ps1
 setup_assets.ps1
+generate_png_logos.ps1
+
 
 
