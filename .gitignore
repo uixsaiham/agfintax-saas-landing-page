@@ -28,6 +28,8 @@ setup_assets.ps1
 setup_tab_rotation.ps1
 add_savings_animation.ps1
 fix_savings_vals.ps1
+update_support_script.ps1
+
 
 
 generate_png_logos.ps1
