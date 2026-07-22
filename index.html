@@ -1153,6 +1153,8 @@ class Component extends DCLogic {
     const promoSeconds = pad(Math.floor((rem % 60000) / 1000));
 
     return {
+      savingsStat1: s.savingsStat1,
+      savingsStat2: s.savingsStat2,
       promoOpen: s.promoOpen,
       closePromo: () => this.closePromo(),
       promoDays, promoHours, promoMinutes, promoSeconds,
