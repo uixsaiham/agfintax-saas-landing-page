@@ -33,6 +33,7 @@
   select:focus, button:focus-visible, input:focus-visible { outline:2px solid #F36222; outline-offset:2px; }
   ::-webkit-scrollbar { width:6px; }
   ::-webkit-scrollbar-thumb { background:#e2ddd5; border-radius:99px; }
+  .sc-interp, .sc-interp.sc-missing, .sc-interp.sc-unresolved { background:none !important; border:none !important; color:inherit !important; }
 </style>
 </helmet>
 
@@ -48,19 +49,19 @@
     </div>
 
     <div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:16px;">Your intake journey</div>
-    <div style="display:flex;flex-direction:column;gap:2px;">
+    <div style="display:flex;flex-direction:column;gap:6px;">
       <sc-for list="{{ milestones }}" as="m" hint-placeholder-count="4">
-        <div style="display:flex;gap:14px;">
-          <div style="display:flex;flex-direction:column;align-items:center;">
-            <div style="width:26px;height:26px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:{{ m.dotBg }};color:{{ m.dotColor }};border:2px solid {{ m.dotBorder }};font-weight:800;font-size:12px;flex-shrink:0;transition:all .3s ease;">
-              <sc-if value="{{ m.done }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1E1E5A" stroke-width="3"><path d="M20 6L9 17l-5-5"></path></svg></sc-if>
+        <div style="display:flex;gap:14px;padding:10px 14px;border-radius:0 12px 12px 0;background:{{ m.rowBg }};border-left:{{ m.rowBorderLeft }};transition:all .25s ease;margin-bottom:2px;align-items:flex-start;">
+          <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;margin-top:2px;">
+            <div style="width:24px;height:24px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:{{ m.dotBg }};color:{{ m.dotColor }};border:2px solid {{ m.dotBorder }};font-weight:800;font-size:11px;flex-shrink:0;transition:all .3s ease;">
+              <sc-if value="{{ m.done }}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#1E1E5A" stroke-width="3"><path d="M20 6L9 17l-5-5"></path></svg></sc-if>
               <sc-if value="{{ m.notDone }}">{{ m.n }}</sc-if>
             </div>
-            <sc-if value="{{ m.hasNext }}"><div style="width:2px;flex:1;min-height:16px;background:{{ m.lineBg }};transition:background .4s ease;"></div></sc-if>
+            <sc-if value="{{ m.hasNext }}"><div style="width:2px;height:20px;background:{{ m.lineBg }};transition:background .4s ease;margin-top:4px;margin-bottom:-14px;"></div></sc-if>
           </div>
-          <div style="padding-bottom:16px;">
-            <div style="font-size:14px;font-weight:700;color:{{ m.textColor }};">{{ m.label }}</div>
-            <sc-if value="{{ m.active }}"><div style="font-size:12px;color:rgba(255,255,255,.55);margin-top:2px;">In progress</div></sc-if>
+          <div>
+            <div style="font-size:14px;font-weight:700;color:{{ m.textColor }};line-height:1.4;">{{ m.label }}</div>
+            <sc-if value="{{ m.active }}"><div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:2px;font-weight:500;">In progress</div></sc-if>
           </div>
         </div>
       </sc-for>
@@ -236,16 +237,12 @@
           <p style="font-size:15px;line-height:1.6;color:#5b5b78;margin:0 0 22px;">Upload last year's return or answer a few quick questions. We'll extract your numbers, show you what's possible, and get a human tax planner to verify every recommendation.</p>
 
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
-            <div style="flex:1;min-width:140px;background:#fff;border:1px solid #ece7de;border-radius:14px;padding:14px 16px;">
+            <div style="width:100%;background:#fff;border:1px solid #ece7de;border-radius:14px;padding:14px 16px;">
               <div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;">
                 <div style="width:7px;height:7px;border-radius:999px;background:#F36222;animation:pulseDot 2s ease-in-out infinite;"></div>
                 <div style="font-size:10.5px;font-weight:700;color:#8b8ba3;text-transform:uppercase;letter-spacing:.04em;">Est. savings</div>
               </div>
               <div style="font-size:21px;font-weight:800;color:#1E1E5A;letter-spacing:-.02em;">{{ heroSavingsDisplay }}</div>
-            </div>
-            <div style="flex:1;min-width:140px;background:#1E1E5A;border-radius:14px;padding:14px 16px;">
-              <div style="font-size:10.5px;font-weight:700;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px;">Time to finish</div>
-              <div style="font-size:21px;font-weight:800;color:#fff;letter-spacing:-.02em;">{{ timeRemainingLabel }}</div>
             </div>
           </div>
 
@@ -403,7 +400,7 @@
               </a>
             </sc-if>
             <sc-if value="{{ step.isInternal }}">
-              <div onClick="{{ step.onClick }}" style="display:flex;align-items:center;gap:7px;padding:{{ step.padding }};border-radius:999px;background:{{ step.bg }};cursor:pointer;">
+              <div onClick="{{ step.onClick }}" style="display:flex;align-items:center;gap:7px;padding:{{ step.padding }};border-radius:999px;background:{{ step.bg }};border:{{ step.border }};cursor:pointer;{{ step.isHighlighted ? 'box-shadow:0 0 0 2px #F36222;' : '' }}">
                 <div style="width:20px;height:20px;border-radius:999px;background:{{ step.dotBg }};color:{{ step.dotColor }};display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">{{ step.n }}</div>
                 <sc-if value="{{ step.showLabel }}"><span style="font-size:13px;font-weight:600;color:{{ step.textColor }};white-space:nowrap;">{{ step.label }}</span></sc-if>
               </div>
@@ -427,20 +424,20 @@
       <div style="background:#1E1E5A;border-radius:18px;padding:22px;color:#fff;">
         <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px;">Peter &amp; Paula · MFJ · 2025</div>
         <div style="font-size:18px;font-weight:800;margin-bottom:16px;">Your optimization value</div>
-        <div style="font-size:32px;font-weight:800;color:#5eead4;letter-spacing:-.02em;margin-bottom:2px;">$21,537</div>
+        <div style="font-size:32px;font-weight:800;color:#4ade80;letter-spacing:-.02em;margin-bottom:2px;">$21,537</div>
         <div style="font-size:11.5px;color:rgba(255,255,255,.6);margin-bottom:18px;">Potential + confirmed savings this year</div>
         <div style="display:flex;flex-direction:column;gap:9px;">
           <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,.07);">
             <div style="font-size:12px;font-weight:600;color:rgba(255,255,255,.8);">Act now</div>
-            <div style="font-size:13px;font-weight:800;color:#fca5a5;">$245</div>
+            <div style="font-size:13px;font-weight:800;color:#f87171;">$245</div>
           </div>
           <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,.07);">
             <div style="font-size:12px;font-weight:600;color:rgba(255,255,255,.8);">Potential</div>
-            <div style="font-size:13px;font-weight:800;color:#ffb385;">$3,150</div>
+            <div style="font-size:13px;font-weight:800;color:#fbbf24;">$3,150</div>
           </div>
           <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,.07);">
             <div style="font-size:12px;font-weight:600;color:rgba(255,255,255,.8);">Confirmed</div>
-            <div style="font-size:13px;font-weight:800;color:#5eead4;">$18,387</div>
+            <div style="font-size:13px;font-weight:800;color:#4ade80;">$18,387</div>
           </div>
         </div>
       </div>
@@ -564,26 +561,24 @@
               <span style="font-size:10.5px;font-weight:800;padding:3px 9px;border-radius:999px;background:{{ row.badgeBg }};color:{{ row.badgeColor }};">{{ row.badgeText }}</span>
             </div>
           </sc-for>
-        </div>
-      </div>
+        </div>      <!-- Strategies: segmented tabs + accordion -->
+      <div id="strategies" style="background:#fff;border:1.5px solid #ece7de;border-radius:24px;padding:26px 28px;box-shadow:0 15px 35px rgba(30,30,90,.06), 0 3px 10px rgba(30,30,90,.02);position:relative;overflow:hidden;transition:all .3s ease;">
+        <div style="position:absolute;left:0;top:0;bottom:0;width:5px;background:#F36222;"></div>
+        <div style="font-size:16px;font-weight:800;color:#1E1E5A;margin-bottom:16px;letter-spacing:-.015em;">Strategies</div>
 
-      <!-- Strategies: segmented tabs + accordion -->
-      <div id="strategies" style="background:#fff;border:1px solid #ece7de;border-radius:18px;padding:22px 24px;">
-        <div style="font-size:15px;font-weight:700;color:#1E1E5A;margin-bottom:14px;">Strategies</div>
-
-        <div style="display:flex;gap:6px;background:#faf8f5;border-radius:12px;padding:5px;margin-bottom:16px;">
+        <div style="display:flex;gap:6px;background:#faf8f5;border-radius:12px;padding:5px;margin-bottom:20px;border:1px solid #ece7de;">
           <sc-for list="{{ tabs }}" as="tab" hint-placeholder-count="3">
-            <button onClick="{{ tab.onClick }}" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 12px;border-radius:9px;border:none;cursor:pointer;background:{{ tab.bg }};color:{{ tab.color }};font-size:12.5px;font-weight:700;transition:all .2s ease;">
+            <button onClick="{{ tab.onClick }}" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 12px;border-radius:9px;border:none;cursor:pointer;background:{{ tab.bg }};color:{{ tab.color }};font-size:12.5px;font-weight:700;box-shadow:{{ tab.shadow }};transition:all .2s ease;">
               {{ tab.label }}
               <span style="font-size:10.5px;font-weight:800;padding:1px 7px;border-radius:999px;background:{{ tab.countBg }};color:{{ tab.countColor }};">{{ tab.count }}</span>
             </button>
           </sc-for>
         </div>
 
-        <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;flex-direction:column;gap:12px;">
           <sc-for list="{{ visibleStrategies }}" as="st" hint-placeholder-count="3">
-            <div style="border:1.5px solid {{ st.border }};border-radius:14px;overflow:hidden;transition:border-color .2s ease;">
-              <div onClick="{{ st.toggle }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 18px;cursor:pointer;background:{{ st.headerBg }};">
+            <div style="border:1.5px solid {{ st.border }};border-radius:14px;overflow:hidden;box-shadow:{{ st.boxShadow }};transform:{{ st.transform }};transition:all .3s cubic-bezier(.16,1,.3,1);">
+              <div onClick="{{ st.toggle }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;cursor:pointer;background:{{ st.headerBg }};">
                 <div style="display:flex;align-items:center;gap:12px;">
                   <div style="width:8px;height:8px;border-radius:999px;background:{{ st.dotColor }};flex-shrink:0;"></div>
                   <div>
@@ -880,15 +875,17 @@ class Component extends DCLogic {
     ];
     return all.map((step, i) => {
       const active = step.key === s.screen;
+      const isIntakeNotActive = step.key === 'intake' && s.screen === 'dashboard';
       return {
         ...step,
         hasNext: i < all.length - 1,
         showLabel: true,
-        bg: active ? '#F36222' : 'transparent',
-        dotBg: active ? '#fff' : '#ece7de',
-        dotColor: active ? '#F36222' : '#b0b0c4',
-        textColor: active ? '#fff' : '#b0b0c4',
-        padding: active ? '6px 14px 6px 6px' : '0',
+        bg: active ? '#F36222' : isIntakeNotActive ? 'rgba(243, 98, 34, 0.1)' : 'transparent',
+        border: isIntakeNotActive ? '1.5px solid #F36222' : '1.5px solid transparent',
+        dotBg: active ? '#fff' : isIntakeNotActive ? '#F36222' : '#ece7de',
+        dotColor: active ? '#F36222' : isIntakeNotActive ? '#fff' : '#b0b0c4',
+        textColor: active ? '#fff' : isIntakeNotActive ? '#F36222' : '#b0b0c4',
+        padding: (active || isIntakeNotActive) ? '6px 14px 6px 6px' : '0',
       };
     });
   }
@@ -917,10 +914,12 @@ class Component extends DCLogic {
       const active = i === firstActive;
       return {
         n: i + 1, label, done, notDone: !done, active,
-        dotBg: done ? '#F36222' : '#1E1E5A',
+        dotBg: done ? '#F36222' : active ? '#F36222' : '#1E1E5A',
         dotColor: done ? '#1E1E5A' : active ? '#fff' : 'rgba(255,255,255,.4)',
         dotBorder: done ? '#F36222' : active ? '#F36222' : 'rgba(255,255,255,.2)',
-        textColor: done ? '#fff' : active ? '#fff' : 'rgba(255,255,255,.4)',
+        textColor: active ? '#fff' : 'rgba(255,255,255,.7)',
+        rowBg: active ? 'rgba(255, 255, 255, 0.08)' : 'transparent',
+        rowBorderLeft: active ? '4px solid #F36222' : '4px solid transparent',
         lineBg: (i < 3 && msDoneFlags[i]) ? '#F36222' : 'rgba(255,255,255,.15)',
         hasNext: i < 3,
       };
@@ -1045,9 +1044,9 @@ class Component extends DCLogic {
       })),
       ribbonSegments: [
         { label: 'Total income', value: '$246,495', flex: 246495, color: '#1E1E5A' },
-        { label: 'Adjustments', value: '-$3,738', flex: 3738, color: '#b0b0c4' },
-        { label: 'Deductions', value: '-$56,332', flex: 56332, color: '#ffb385' },
-        { label: 'Taxable income', value: '$186,425', flex: 186425, color: '#0f766e' },
+        { label: 'Adjustments', value: '-$3,738', flex: 3738, color: '#94a3b8' },
+        { label: 'Deductions', value: '-$56,332', flex: 56332, color: '#F36222' },
+        { label: 'Taxable income', value: '$186,425', flex: 186425, color: '#10b981' },
       ],
       magiRows: [
         { title: 'Roth IRA contribution', detail: 'Threshold $230,000 · Retirement', badgeText: 'Above limit', badgeBg: '#fff0e6', badgeColor: '#c94f1a' },
@@ -1055,9 +1054,9 @@ class Component extends DCLogic {
         { title: 'NIIT (3.8%) applies', detail: 'Threshold $250,000 · Investment income', badgeText: 'Not yet', badgeBg: '#f5f2ec', badgeColor: '#8b8ba3' },
       ],
       tabs: [
-        { key: 'act', label: 'Act now', count: bucketCounts.act, onClick: () => this.setTab('act'), bg: s.activeTab === 'act' ? '#fff' : 'transparent', color: s.activeTab === 'act' ? '#ef4444' : '#8b8ba3', countBg: s.activeTab === 'act' ? '#fef2f2' : '#ece7de', countColor: s.activeTab === 'act' ? '#ef4444' : '#8b8ba3' },
-        { key: 'potential', label: 'Potential savings', count: bucketCounts.potential, onClick: () => this.setTab('potential'), bg: s.activeTab === 'potential' ? '#fff' : 'transparent', color: s.activeTab === 'potential' ? '#F36222' : '#8b8ba3', countBg: s.activeTab === 'potential' ? '#fff0e6' : '#ece7de', countColor: s.activeTab === 'potential' ? '#F36222' : '#8b8ba3' },
-        { key: 'applied', label: 'Already applied', count: bucketCounts.applied, onClick: () => this.setTab('applied'), bg: s.activeTab === 'applied' ? '#fff' : 'transparent', color: s.activeTab === 'applied' ? '#1E1E5A' : '#8b8ba3', countBg: s.activeTab === 'applied' ? '#ECECF5' : '#ece7de', countColor: s.activeTab === 'applied' ? '#1E1E5A' : '#8b8ba3' },
+        { key: 'act', label: 'Act now', count: bucketCounts.act, onClick: () => this.setTab('act'), bg: s.activeTab === 'act' ? '#fff' : 'transparent', color: s.activeTab === 'act' ? '#ef4444' : '#8b8ba3', countBg: s.activeTab === 'act' ? '#fef2f2' : '#ece7de', countColor: s.activeTab === 'act' ? '#ef4444' : '#8b8ba3', shadow: s.activeTab === 'act' ? '0 4px 10px rgba(30,30,90,.08)' : 'none' },
+        { key: 'potential', label: 'Potential savings', count: bucketCounts.potential, onClick: () => this.setTab('potential'), bg: s.activeTab === 'potential' ? '#fff' : 'transparent', color: s.activeTab === 'potential' ? '#F36222' : '#8b8ba3', countBg: s.activeTab === 'potential' ? '#fff0e6' : '#ece7de', countColor: s.activeTab === 'potential' ? '#F36222' : '#8b8ba3', shadow: s.activeTab === 'potential' ? '0 4px 10px rgba(30,30,90,.08)' : 'none' },
+        { key: 'applied', label: 'Already applied', count: bucketCounts.applied, onClick: () => this.setTab('applied'), bg: s.activeTab === 'applied' ? '#fff' : 'transparent', color: s.activeTab === 'applied' ? '#1E1E5A' : '#8b8ba3', countBg: s.activeTab === 'applied' ? '#ECECF5' : '#ece7de', countColor: s.activeTab === 'applied' ? '#1E1E5A' : '#8b8ba3', shadow: s.activeTab === 'applied' ? '0 4px 10px rgba(30,30,90,.08)' : 'none' },
       ],
       visibleStrategies: visible.map(st => {
         const expanded = s.expandedKey === st.key;
@@ -1068,6 +1067,8 @@ class Component extends DCLogic {
           headerBg: expanded ? '#faf8f5' : '#fff',
           dotColor: st.color,
           chevronRotate: expanded ? 'rotate(180deg)' : 'rotate(0deg)',
+          boxShadow: expanded ? '0 12px 28px rgba(30,30,90,0.1)' : 'none',
+          transform: expanded ? 'translateY(-2px)' : 'none',
         };
       }),
     };

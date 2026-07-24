@@ -64,11 +64,11 @@
     <div style="display:flex;flex-direction:column;gap:12px;">
       <sc-for list="{{ tasks }}" as="task" hint-placeholder-count="3">
         <div onClick="{{ task.toggle }}" style="background:#fff;border:1px solid #ece7de;border-radius:16px;padding:18px 22px;display:flex;align-items:flex-start;gap:14px;cursor:pointer;transition:box-shadow .2s ease;" style-hover="box-shadow:0 8px 20px rgba(30,30,90,.06);">
-          <div style="width:24px;height:24px;border-radius:999px;background:{{ task.dotBg }};border:2px solid {{ task.dotBorder }};display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
-            <sc-if value="{{ task.done }}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" style="animation:popIn .3s ease both;"><path d="M20 6L9 17l-5-5"></path></svg></sc-if>
+          <div style="width:22px;height:22px;border-radius:6px;background:{{ task.dotBg }};border:2px solid {{ task.dotBorder }};display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all .2s ease;">
+            <sc-if value="{{ task.done }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" style="animation:popIn .3s ease both;"><path d="M20 6L9 17l-5-5"></path></svg></sc-if>
           </div>
           <div style="flex:1;">
-            <div style="font-size:14px;font-weight:700;color:{{ task.titleColor }};text-decoration:{{ task.strike }};">{{ task.title }}</div>
+            <div style="font-size:14px;font-weight:700;color:{{ task.titleColor }};">{{ task.title }}</div>
             <div style="font-size:12.5px;color:#8b8ba3;margin-top:3px;line-height:1.5;">{{ task.detail }}</div>
           </div>
           <div style="font-size:12px;font-weight:700;color:#F36222;white-space:nowrap;">{{ task.savings }}</div>
@@ -124,7 +124,6 @@ class Component extends DCLogic {
         dotBg: t.done ? '#F36222' : '#fff',
         dotBorder: t.done ? '#F36222' : '#ece7de',
         titleColor: t.done ? '#8b8ba3' : '#1E1E5A',
-        strike: t.done ? 'line-through' : 'none',
       })),
       allDone: doneCount === s.tasks.length,
     };
